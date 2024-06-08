@@ -1,15 +1,143 @@
 <!doctype html>
 <html>
-<head><title>Results</title></head>
+<head>
+    <title>Results</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            width: 100%;
+            box-sizing: border-box;
+            margin: 20px;
+        }
+        h2 {
+            color: #007bff;
+            margin-top: 0;
+        }
+        h3 {
+            margin-top: 30px;
+            color: #007bff;
+        }
+        p {
+            font-size: 16px;
+            line-height: 1.6;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            margin-bottom: 10px;
+        }
+        a {
+            color: #007bff;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        a:hover {
+            color: #0056b3;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border-radius: 4px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+        .back-link:hover {
+            background-color: #0056b3;
+        }
+        .pagination {
+            margin-top: 20px;
+            text-align: center;
+        }
+        .page-link {
+            margin: 0 5px;
+            padding: 5px 10px;
+            background-color: #007bff;
+            color: #fff;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+        .page-link:hover {
+            background-color: #0056b3;
+        }
+        .page-link.disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
 <body>
-    <h2>Closest Section: {{ closest_section }}</h2>
-    <p>{{ section_text }}</p>
-    <h3>Relevant News Articles:</h3>
-    <ul>
-    {% for article in news_articles %}
-        <li><a href="{{ article['url'] }}">{{ article['title'] }}</a></li>
-    {% endfor %}
-    </ul>
-    <a href="/">Back</a>
+    <div class="container">
+        <a href="/" class="back-link">Back</a>
+        <h2>Closest Section: {{ closest_section }}</h2>
+        <p>{{ section_text }}</p>
+        <h3>Relevant News Articles:</h3>
+        <ul id="article-list">
+        {% for article in news_articles %}
+            <li class="article-item"><a href="{{ article['url'] }}" target="_blank">{{ article['title'] }}</a></li>
+        {% endfor %}
+        </ul>
+        <div class="pagination">
+            <span class="page-link" id="prev-page">Previous</span>
+            <span class="page-link" id="next-page">Next</span>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const articlesPerPage = 5;
+            const articles = document.querySelectorAll('.article-item');
+            const totalPages = Math.ceil(articles.length / articlesPerPage);
+            let currentPage = 1;
+
+            function showPage(page) {
+                articles.forEach((article, index) => {
+                    article.style.display = 'none';
+                    if (index >= (page - 1) * articlesPerPage && index < page * articlesPerPage) {
+                        article.style.display = 'block';
+                    }
+                });
+
+                document.getElementById('prev-page').classList.toggle('disabled', page === 1);
+                document.getElementById('next-page').classList.toggle('disabled', page === totalPages);
+            }
+
+            document.getElementById('prev-page').addEventListener('click', () => {
+                if (currentPage > 1) {
+                    currentPage--;
+                    showPage(currentPage);
+                }
+            });
+
+            document.getElementById('next-page').addEventListener('click', () => {
+                if (currentPage < totalPages) {
+                    currentPage++;
+                    showPage(currentPage);
+                }
+            });
+
+            showPage(currentPage);
+        });
+    </script>
 </body>
 </html>
