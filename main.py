@@ -3,14 +3,13 @@ from flask import Flask, request, render_template
 app = Flask(__name__)
 
 # Include the functions from previous steps
-import fitz  # PyMuPDF  
+import fitz  # PyMuPDF
 import re
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 import requests
 
 # Function to extract PDF text
-
 def extract_pdf_text(pdf_path):
     doc = fitz.open(pdf_path)
     text = ""
@@ -43,7 +42,7 @@ def find_closest_section(user_input, penal_code):
     closest_section = list(penal_code.keys())[closest_index]
     return closest_section, penal_code[closest_section]
 
-# Function to fetch news articles from Indian sources
+# Function to fetch news articles
 def fetch_news(query, api_key):
     url = f"https://newsapi.org/v2/everything?q={query}&apiKey={api_key}"
     response = requests.get(url)
@@ -52,6 +51,7 @@ def fetch_news(query, api_key):
         return articles
     else:
         return []
+
 # Load and structure the penal code data
 pdf_path = "/workspaces/Crime-Detection-and-Punishment_Prediction-Chat-Bot/Doc/IPC.pdf"
 pdf_text = extract_pdf_text(pdf_path)
@@ -71,4 +71,4 @@ def index():
     return render_template('index.html')
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(port=5002, debug=True)
