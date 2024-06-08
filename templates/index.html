@@ -1,34 +1,11 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-<head>
-    <title>PDF Chatbot</title>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-</head>
+<head><title>Crime Finder</title></head>
 <body>
-    <h1>Welcome to the PDF Chatbot!</h1>
-    <form id="question-form">
-        <label for="question">Ask me a question:</label><br>
-        <input type="text" id="question" name="question" required><br><br>
-        <input type="submit" value="Submit">
+    <form method="post">
+        <textarea name="crime_description" rows="4" cols="50" placeholder="Describe the crime..."></textarea>
+        <br>
+        <input type="submit" value="Find Punishment & News">
     </form>
-    <div id="answer"></div>
-
-    <script>
-        $(document).ready(function(){
-            $('#question-form').on('submit', function(event){
-                event.preventDefault();
-                var question = $('#question').val();
-                $.ajax({
-                    url: '/ask',
-                    method: 'POST',
-                    contentType: 'application/json',
-                    data: JSON.stringify({question: question}),
-                    success: function(response){
-                        $('#answer').html('<p>' + response.answer + '</p>');
-                    }
-                });
-            });
-        });
-    </script>
 </body>
 </html>
