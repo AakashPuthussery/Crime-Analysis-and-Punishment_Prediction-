@@ -7,7 +7,7 @@ This project is a web application designed to analyze crime data and predict sui
 ## Team
 
 - Theertha K Rajendran
-- [Your Name]
+- Aakash P
 
 ## Features
 
@@ -19,15 +19,13 @@ This project is a web application designed to analyze crime data and predict sui
 
 - **Frontend**: HTML, CSS, JavaScript
 - **Backend**: Python, Flask
-- **Database**: SQLite
 - **Machine Learning**: Scikit-learn, Pandas, NumPy
-- **Visualization**: Matplotlib, Seaborn
 
 ## Installation
 
 1. Clone the repository:
     ```bash
-    git clone https://github.com/yourusername/crime-analysis-prediction.git
+    git clone https://github.com/AakashPuthussery/crime-analysis-prediction.git
     ```
 2. Navigate to the project directory:
     ```bash
@@ -52,5 +50,11 @@ This project is a web application designed to analyze crime data and predict sui
 1. Open your web browser and go to `http://127.0.0.1:5000`.
 2. Use the interface to explore crime data trends and obtain punishment predictions.
 
-## Project Structure
+## Contributing
+
+Contributions are welcome! Please fork the repository and create a pull request with your changes. 
+
+## Acknowledgements
+
+We would like to thank MSIGMA and IEEE for organizing TechBurst 2K24 and providing us with the platform to showcase our project.
 
