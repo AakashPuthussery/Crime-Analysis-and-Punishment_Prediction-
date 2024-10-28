@@ -1,7 +1,6 @@
 from flask import Flask, request, render_template
 
 app = Flask(__name__)
-
 # Include the functions from previous steps
 import fitz  # PyMuPDF
 import re
